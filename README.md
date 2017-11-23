@@ -1,12 +1,17 @@
 force-client-go
 ===============
 
+[![Build Status](https://travis-ci.org/mikan/force-client-go.svg?branch=master)](https://travis-ci.org/mikan/force-client-go)
+[![codecov](https://codecov.io/gh/mikan/force-client-go/branch/master/graph/badge.svg)](https://codecov.io/gh/mikan/force-client-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mikan/force-client-go)](https://goreportcard.com/report/github.com/mikan/force-client-go)
+
 A simple client library for Force.com REST API written by [Go](https://golang.org/).
 
 ### Key features
 
 - Create, read, update, delete, and query operations through a simple API
 - Pre-defined and fully extendable SObject structs
+- Any operations takes standard `context.Context` object (since Go 1.7) that can control canceling behavior
 - Only using Golang standard libraries, no additional dependencies required 
 
 ### Sample
