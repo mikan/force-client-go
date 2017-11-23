@@ -8,6 +8,7 @@ before_install:
   - go get -t -v ./...
 
 script:
+  - chmod +x test.sh
   - ./test.sh
 
 after_success:
