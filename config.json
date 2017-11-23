@@ -1,0 +1,10 @@
+{
+  "instance": "xxx.salesforce.com",
+  "production": true,
+  "version": "41.0",
+  "client_id": "xxx",
+  "client_secret": "xxx",
+  "username": "xxx@xxx",
+  "password": "xxx",
+  "api_token": "xxx"
+}

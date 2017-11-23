@@ -1,0 +1,9 @@
+# Gogland
+.idea
+
+# force-client
+.session
+config-*.json
+
+# test
+coverage.txt
