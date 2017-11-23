@@ -2,19 +2,21 @@ package force
 
 import (
 	"context"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
-	"time"
 )
+
+const testAuthEndpoint = "/auth"
 
 func TestNewClient(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			if r.Method != "POST" {
-				t.Fatal("must use POST method")
+			if r.Method != http.MethodPost {
+				t.Fatalf("must use %s method", http.MethodPost)
 			}
 			raw, err := ioutil.ReadAll(r.Body)
 			if err != nil {
@@ -33,20 +35,20 @@ func TestNewClient(t *testing.T) {
 			if !strings.Contains(body, "password") {
 				t.Fatal("password not found")
 			}
-			w.Header().Set("content-Type", "application/json;charset=UTF-8")
-			w.Write([]byte("{\"access_token\":\"xxx\",\"instance_url\":\"xxx\",\"id\":\"xxx\",\"token_type\":\"xxx\"" +
-				",\"issued_at\":\"xxx\",\"signature\":\"xxx\"}"))
+			loginResponse(w)
 		},
 	))
 	defer ts.Close()
-	client, err := NewClient("cs58.salesforce.com", UnitTest, "40.0", nil)
-	if err != nil {
-		t.Fatal("failed to setup client!")
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	ctx = context.WithValue(ctx, "location", ts.URL)
-	err = client.Login(ctx, &Credential{"xxx", "xxx", "xxx", "xxx", "xxx"})
+	client, _ := NewClient(ts.URL, UnitTest, sampleAPIVer, nil)
+	ctx := context.WithValue(context.Background(), "location", ts.URL+testAuthEndpoint)
+	err := client.Login(ctx, &Credential{"xxx", "xxx", "xxx", "xxx", "xxx"})
 	if err != nil {
 		t.Fatalf("failed to execute Login(): %v", err)
 	}
+}
+
+func loginResponse(w http.ResponseWriter) {
+	w.Header().Set("content-Type", "application/json")
+	response, _ := json.Marshal(SessionID{"xxx", "xxx", "xxx", "xxx", "xxx", "xxx", "", ""})
+	w.Write(response)
 }

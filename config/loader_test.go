@@ -1,6 +1,10 @@
 package config
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/mikan/force-client-go/force"
+)
 
 func TestLoadWithSampleFile(t *testing.T) {
 	params, err := Load("../config.json")
@@ -60,5 +64,16 @@ func TestLoadWithIllegalFile(t *testing.T) {
 	_, err := Load("../README.md")
 	if err == nil {
 		t.Fatal("missing expected error")
+	}
+}
+
+func TestEnv(t *testing.T) {
+	prod := Params{Prod: true}
+	if prod.Env() != force.Production {
+		t.Fatalf("expected %d, actual%d", force.Production, prod.Env())
+	}
+	sand := Params{Prod: false}
+	if sand.Env() != force.Sandbox {
+		t.Fatalf("expected %d, actual%d", force.Sandbox, sand.Env())
 	}
 }

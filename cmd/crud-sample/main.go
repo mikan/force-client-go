@@ -13,7 +13,7 @@ import (
 	"github.com/mikan/force-client-go/sobject"
 )
 
-var f = flag.String("f", "config-dev.json", "load specified credential file")
+var f = flag.String("f", "config.json", "load specified credential file")
 
 func main() {
 	flag.Parse()

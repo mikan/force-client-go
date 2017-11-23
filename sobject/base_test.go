@@ -4,7 +4,6 @@ import (
 	"net/http/httptest"
 
 	"context"
-	"time"
 
 	"github.com/mikan/force-client-go/force"
 )
@@ -16,7 +15,7 @@ func makeTestCredential() *force.Credential {
 }
 
 func makeTestContext() *context.Context {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx := context.Background()
 	return &ctx
 }
 
@@ -25,6 +24,6 @@ func makeTestClient(ts *httptest.Server) *force.Client {
 	if err != nil {
 		panic("failed to setup client!")
 	}
-	client.Session(&force.SessionID{AccessToken: "xxx", TokenType: "Bearer"})
+	client.Session(&force.SessionID{AccessToken: "000000000000000000", TokenType: "Bearer"})
 	return client
 }

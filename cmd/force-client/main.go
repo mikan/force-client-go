@@ -6,7 +6,6 @@ import (
 	"flag"
 	"log"
 	"os"
-	"time"
 
 	"github.com/mikan/force-client-go/config"
 	"github.com/mikan/force-client-go/force"
@@ -101,7 +100,7 @@ func exec(cred *force.Credential, client *force.Client, request *request) {
 	if cred == nil || client == nil || request == nil {
 		logger.Fatal("precondition check failed.")
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx := context.Background()
 	err := client.Login(ctx, cred)
 	if err != nil {
 		logger.Fatalf("Failed to login: %v", err)
