@@ -46,6 +46,7 @@ contact := sobject.Contact{FirstName: "Test", LastName: "User"}
 id, err := client.Create(context.Background(), sobject.ContactObjectName, &contact)
 
 // Read
+var readResult sobject.Contact
 err = client.Read(context.Background(), sobject.ContactObjectName, id, &readResult)
 
 // Update
