@@ -93,20 +93,14 @@ func TestDetectForNothing(t *testing.T) {
 }
 
 func TestClientForProd(t *testing.T) {
-	prod := client("localhost", true, "41.0")
-	if prod.Instance.Host != "localhost" {
-		t.Fatalf("expected %s, actual %s", "localhost", prod.Instance.Host)
-	}
+	prod := client(true, "41.0")
 	if prod.Env != force.Production {
 		t.Fatalf("expected %d, actual%d", force.Production, prod.Env)
 	}
 }
 
 func TestClientForSand(t *testing.T) {
-	sand := client("localhost", false, "20.0")
-	if sand.Instance.Host != "localhost" {
-		t.Fatalf("expected %s, actual %s", "localhost", sand.Instance.Host)
-	}
+	sand := client(false, "20.0")
 	if sand.Env != force.Sandbox {
 		t.Fatalf("expected %d, actual%d", force.Sandbox, sand.Env)
 	}

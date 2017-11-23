@@ -7,15 +7,8 @@ const (
 	sampleSObjectID = "0037F00000Hc2GyQAJ"
 )
 
-func TestNewClientInvalidInstance(t *testing.T) {
-	_, err := NewClient("\n", UnitTest, sampleAPIVer, nil)
-	if err == nil {
-		t.Fatal("nil error returned")
-	}
-}
-
 func TestNewClientInvalidVersion(t *testing.T) {
-	_, err := NewClient("localhost", UnitTest, "a.b", nil)
+	_, err := NewClient(UnitTest, "a.b", nil)
 	if err == nil {
 		t.Fatal("nil error returned")
 	}

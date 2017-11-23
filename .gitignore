@@ -4,6 +4,7 @@
 # force-client
 .session
 config-*.json
+cmd/scratch/*
 
 # test
 coverage.txt

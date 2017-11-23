@@ -10,9 +10,8 @@ import (
 
 type Params struct {
 	force.Credential
-	Instance string `json:"instance"`
-	Prod     bool   `json:"production"`
-	Ver      string `json:"version"`
+	Prod bool   `json:"production"`
+	Ver  string `json:"version"`
 }
 
 func (p *Params) Cred() *force.Credential {

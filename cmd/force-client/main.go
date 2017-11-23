@@ -44,7 +44,7 @@ var logger = log.New(os.Stdout, "", log.LstdFlags)
 func main() {
 	flag.Parse()
 	p := load(*f)
-	exec(p.Cred(), client(p.Instance, p.Prod, p.Ver), detect(*c, *r, *u, *d, *q, *i, *j))
+	exec(p.Cred(), client(p.Prod, p.Ver), detect(*c, *r, *u, *d, *q, *i, *j))
 }
 
 func load(file string) *config.Params {
@@ -81,15 +81,12 @@ func detect(create, read, update, del, query, id, data string) *request {
 	return nil
 }
 
-func client(instance string, production bool, version string) *force.Client {
-	if len(instance) == 0 {
-		logger.Fatal("Please specify name instance with \"-s\" option (\"-h\" for help).")
-	}
+func client(production bool, version string) *force.Client {
 	env := force.Sandbox
 	if production {
 		env = force.Production
 	}
-	client, err := force.NewClient(instance, env, version, logger)
+	client, err := force.NewClient(env, version, logger)
 	if err != nil {
 		logger.Fatalf("Failed to create new client: %v", err)
 	}

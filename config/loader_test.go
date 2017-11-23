@@ -11,9 +11,6 @@ func TestLoadWithSampleFile(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(params.Instance) == 0 {
-		t.Fatal("Instance not found")
-	}
 	if !params.Prod {
 		t.Fatal("Prod is false or missing")
 	}

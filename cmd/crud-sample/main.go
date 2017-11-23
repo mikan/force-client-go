@@ -20,7 +20,7 @@ func main() {
 	params, _ := config.Load(*f)
 
 	// Login
-	client, _ := force.NewClient(params.Instance, params.Env(), params.Ver, log.New(os.Stdout, "", log.LstdFlags))
+	client, _ := force.NewClient(params.Env(), params.Ver, log.New(os.Stdout, "", log.LstdFlags))
 	if err := client.Login(context.Background(), params.Cred()); err != nil {
 		log.Fatal(err)
 	}

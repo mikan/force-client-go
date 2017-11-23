@@ -9,9 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 	"regexp"
-	"strings"
 )
 
 // Env defines force.com target environments
@@ -27,7 +25,6 @@ const (
 const DefaultVersion = "40.0"
 
 type Client struct {
-	Instance   *url.URL
 	Version    string
 	Env        Env
 	HttpClient *http.Client
@@ -40,14 +37,7 @@ const sObjectResource = "/services/data/v%s/sobjects/"
 var versionMatcher = regexp.MustCompile("[0-9]+\\.[0-9]+")
 
 // NewClient creates the new force.com client.
-func NewClient(instance string, env Env, version string, logger *log.Logger) (*Client, error) {
-	if !strings.HasPrefix(instance, "http") {
-		instance = "https://" + instance
-	}
-	parsedURL, err := url.Parse(instance)
-	if err != nil {
-		return nil, errors.New("invalid instance: " + instance)
-	}
+func NewClient(env Env, version string, logger *log.Logger) (*Client, error) {
 	if env < 0 {
 		return nil, errors.New("invalid env: " + string(env))
 	}
@@ -57,7 +47,7 @@ func NewClient(instance string, env Env, version string, logger *log.Logger) (*C
 	if logger == nil {
 		logger = log.New(ioutil.Discard, "", log.LstdFlags)
 	}
-	client := &Client{parsedURL, version, env, &http.Client{}, logger, nil}
+	client := &Client{version, env, &http.Client{}, logger, nil}
 	return client, nil
 }
 
@@ -67,7 +57,7 @@ func (c *Client) Session(session *SessionID) {
 }
 
 func (c *Client) newRequest(ctx context.Context, method, resource string, body io.Reader) (*http.Request, error) {
-	location := c.Instance.String() + fmt.Sprintf(resource, c.Version)
+	location := c.session.InstanceURL + fmt.Sprintf(resource, c.Version)
 	req, err := http.NewRequest(method, location, body)
 	if err != nil {
 		return nil, err

@@ -38,11 +38,12 @@ func TestCreate(t *testing.T) {
 		},
 	))
 	defer ts.Close()
-	client, _ := NewClient(ts.URL, UnitTest, sampleAPIVer, nil)
+	client, _ := NewClient(UnitTest, sampleAPIVer, nil)
 	ctx := context.WithValue(context.Background(), "location", ts.URL+testAuthEndpoint)
 	err := client.Login(ctx, &Credential{"xxx", "xxx", "xxx", "xxx", "xxx"})
 	if err != nil {
 		t.Fatalf("failed to execute Login(): %v", err)
 	}
+	client.session.InstanceURL = ts.URL
 	client.Create(ctx, "Contact", "{\"FirstName\":\"Test\",\"LastName\":\"User\"}")
 }

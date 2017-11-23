@@ -21,12 +21,13 @@ func TestUpdate(t *testing.T) {
 		},
 	))
 	defer ts.Close()
-	client, _ := NewClient(ts.URL, UnitTest, sampleAPIVer, nil)
+	client, _ := NewClient(UnitTest, sampleAPIVer, nil)
 	ctx := context.WithValue(context.Background(), "location", ts.URL+testAuthEndpoint)
 	err := client.Login(ctx, &Credential{"xxx", "xxx", "xxx", "xxx", "xxx"})
 	if err != nil {
 		t.Fatalf("failed to execute Login(): %v", err)
 	}
+	client.session.InstanceURL = ts.URL
 	err = client.Update(ctx, "Contact", sampleSObjectID, "{\"FirstName\":\"Test2\"}")
 	if err != nil {
 		t.Fatalf("unexpected error cought: %v", err)

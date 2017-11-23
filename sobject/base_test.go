@@ -20,10 +20,10 @@ func makeTestContext() *context.Context {
 }
 
 func makeTestClient(ts *httptest.Server) *force.Client {
-	client, err := force.NewClient(ts.URL, force.UnitTest, force.DefaultVersion, nil)
+	client, err := force.NewClient(force.UnitTest, force.DefaultVersion, nil)
 	if err != nil {
 		panic("failed to setup client!")
 	}
-	client.Session(&force.SessionID{AccessToken: "000000000000000000", TokenType: "Bearer"})
+	client.Session(&force.SessionID{AccessToken: "000000000000000000", TokenType: "Bearer", InstanceURL: ts.URL})
 	return client
 }
