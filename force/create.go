@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"reflect"
 	"strings"
 )
 
@@ -28,9 +27,10 @@ func (c *Client) Create(ctx context.Context, sObjectName string, v interface{}) 
 
 	// Marshal struct
 	var body []byte
-	if reflect.TypeOf(v).Kind() == reflect.String {
+	switch v.(type) {
+	case string:
 		body = []byte((v).(string))
-	} else {
+	default:
 		jsonBody, err := json.Marshal(v)
 		if err != nil {
 			return "", err

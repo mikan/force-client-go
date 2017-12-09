@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"reflect"
 )
 
 // Update updates specified record.
@@ -24,9 +23,10 @@ func (c *Client) Update(ctx context.Context, sObjectName, id string, v interface
 
 	// Marshal struct
 	var body []byte
-	if reflect.TypeOf(v).Kind() == reflect.String {
+	switch v.(type) {
+	case string:
 		body = []byte((v).(string))
-	} else {
+	default:
 		jsonBody, err := json.Marshal(v)
 		if err != nil {
 			return err
