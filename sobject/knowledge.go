@@ -1,11 +1,11 @@
 package sobject
 
-import (
-	"context"
-	"errors"
+const KnowledgeObjectName = "Knowledge__kav"
 
-	"github.com/mikan/force-client-go/force"
-)
+type KnowledgeSet struct {
+	BaseRecordSet
+	Records []Knowledge `json:"records"`
+}
 
 // Knowledge defines knowledge object "Knowledge__kav".
 type Knowledge struct {
@@ -44,48 +44,4 @@ type Knowledge struct {
 	UrlName                Text          `json:",omitempty"`
 	ValidationStatus       Picklist      `json:",omitempty"`
 	VersionNumber          Number        `json:",omitempty"`
-}
-
-type KnowledgeSet struct {
-	BaseRecordSet
-	Records []Knowledge `json:"records"`
-}
-
-const KnowledgeObjectName = "Knowledge__kav"
-
-func AllKnowledge(ctx context.Context, client *force.Client) ([]Knowledge, error) {
-	var set KnowledgeSet
-	next, err := client.Query(ctx, "SELECT Title,Summary FROM "+KnowledgeObjectName, &set)
-	if err != nil {
-		client.Logger.Printf("failed to execute query: %v", err)
-		return nil, err
-	}
-	if len(next) > 0 {
-		client.Logger.Printf("Next resource found: %s", next) // TODO: retrieve and merge next resources
-	}
-	if len(set.ErrorCode) > 0 {
-		client.Logger.Printf("failed to execute query: %s (%s)", set.ErrorCode, set.Message)
-		return nil, err
-	}
-	return set.Records, nil
-}
-
-func SingleKnowledge(ctx context.Context, client *force.Client, id Id) (*Knowledge, error) {
-	var set KnowledgeSet
-	next, err := client.Query(ctx, "SELECT Title,Summary FROM "+KnowledgeObjectName+" WHERE Id='"+string(id)+"'", &set)
-	if err != nil {
-		client.Logger.Printf("failed to execute query: %v", err)
-		return nil, err
-	}
-	if len(next) > 0 {
-		client.Logger.Printf("Next resource found: %s", next) // TODO: retrieve and merge next resources
-	}
-	if len(set.ErrorCode) > 0 {
-		client.Logger.Printf("failed to execute query: %s (%s)", set.ErrorCode, set.Message)
-		return nil, err
-	}
-	if len(set.Records) == 0 {
-		return nil, errors.New("no such knowledge: " + string(id))
-	}
-	return &set.Records[0], nil
 }

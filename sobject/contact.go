@@ -1,10 +1,11 @@
 package sobject
 
-import (
-	"context"
+const ContactObjectName = "Contact"
 
-	"github.com/mikan/force-client-go/force"
-)
+type ContactSet struct {
+	BaseRecordSet
+	Records []Contact `json:"records"`
+}
 
 // Contact defines standard object "Contact".
 type Contact struct {
@@ -46,28 +47,4 @@ type Contact struct {
 	Phone              Phone        `json:",omitempty"`
 	ReportsToId        Id           `json:",omitempty"`
 	Title              Text         `json:",omitempty"`
-}
-
-type ContactSet struct {
-	BaseRecordSet
-	Records []Contact `json:"records"`
-}
-
-const ContactObjectName = "Contact"
-
-func AllContact(ctx context.Context, client *force.Client) ([]Contact, error) {
-	var set ContactSet
-	next, err := client.Query(ctx, "SELECT Title FROM "+ContactObjectName, &set)
-	if err != nil {
-		client.Logger.Printf("failed to execute query: %v", err)
-		return nil, err
-	}
-	if len(next) > 0 {
-		client.Logger.Printf("Next resource found: %s", next) // TODO: retrieve and merge next resources
-	}
-	if len(set.ErrorCode) > 0 {
-		client.Logger.Printf("failed to execute query: %s (%s)", set.ErrorCode, set.Message)
-		return nil, err
-	}
-	return set.Records, nil
 }
