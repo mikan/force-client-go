@@ -14,6 +14,12 @@ A simple client library for Force.com REST API written by [Go](https://golang.or
 - Any operations takes standard `context.Context` object (since Go 1.7) that can control canceling behavior
 - Only using Golang standard libraries, no additional dependencies required 
 
+### Setup
+
+```
+go get github.com/mikan/force-client-go/...
+```
+
 ### Sample
 
 #### Authentication
