@@ -36,8 +36,12 @@ type Location string // Geolocation Compound Field
 
 func Lookup(name string) interface{} {
 	switch name {
+	case UserObjectName:
+		return UserSet{}
 	case ContactObjectName:
 		return ContactSet{}
+	case CaseObjectName:
+		return CaseSet{}
 	case "Knowledge":
 		fallthrough
 	case KnowledgeObjectName:
