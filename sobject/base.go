@@ -29,6 +29,8 @@ type Fax string
 type Picklist string
 type Number int64
 type AutoIncrement string
+type Address string // Address Compound Fields
+type Location string // Geolocation Compound Field
 
 func Lookup(name string) interface{} {
 	switch name {

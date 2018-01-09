@@ -29,14 +29,17 @@ type Contact struct {
 	LastCUUpdateDate   DateTime     `json:",omitempty"`
 	LastModifiedById   Id           `json:",omitempty"`
 	LeadSource         Picklist     `json:",omitempty"`
+	MailingAddress     Address      `json:",omitempty"`
 	MailingStreet      Text         `json:",omitempty"` // MailingAddress
 	MailingCity        Text         `json:",omitempty"` // MailingAddress
 	MailingState       Text         `json:",omitempty"` // MailingAddress
 	MailingPostalCode  Text         `json:",omitempty"` // MailingAddress
 	MailingCountry     Text         `json:",omitempty"` // MailingAddress
 	MobilePhone        Phone        `json:",omitempty"`
+	Name               Text         `json:",omitempty"`
 	FirstName          Text         `json:",omitempty"` // Name
 	LastName           Text         `json:",omitempty"` // Name
+	OtherAddress       Address      `json:",omitempty"`
 	OtherStreet        Text         `json:",omitempty"` // OtherAddress
 	OtherCity          Text         `json:",omitempty"` // OtherAddress
 	OtherState         Text         `json:",omitempty"` // OtherAddress
