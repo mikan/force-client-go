@@ -29,19 +29,19 @@ type Contact struct {
 	LastCUUpdateDate   DateTime     `json:",omitempty"`
 	LastModifiedById   Id           `json:",omitempty"`
 	LeadSource         Picklist     `json:",omitempty"`
-	MailingStreet      string       `json:",omitempty"` // MailingAddress
-	MailingCity        string       `json:",omitempty"` // MailingAddress
-	MailingState       string       `json:",omitempty"` // MailingAddress
-	MailingPostalCode  string       `json:",omitempty"` // MailingAddress
-	MailingCountry     string       `json:",omitempty"` // MailingAddress
+	MailingStreet      Text         `json:",omitempty"` // MailingAddress
+	MailingCity        Text         `json:",omitempty"` // MailingAddress
+	MailingState       Text         `json:",omitempty"` // MailingAddress
+	MailingPostalCode  Text         `json:",omitempty"` // MailingAddress
+	MailingCountry     Text         `json:",omitempty"` // MailingAddress
 	MobilePhone        Phone        `json:",omitempty"`
-	FirstName          string       `json:",omitempty"` // Name
-	LastName           string       `json:",omitempty"` // Name
-	OtherStreet        string       `json:",omitempty"` // OtherAddress
-	OtherCity          string       `json:",omitempty"` // OtherAddress
-	OtherState         string       `json:",omitempty"` // OtherAddress
-	OtherPostalCode    string       `json:",omitempty"` // OtherAddress
-	OtherCountry       string       `json:",omitempty"` // OtherAddress
+	FirstName          Text         `json:",omitempty"` // Name
+	LastName           Text         `json:",omitempty"` // Name
+	OtherStreet        Text         `json:",omitempty"` // OtherAddress
+	OtherCity          Text         `json:",omitempty"` // OtherAddress
+	OtherState         Text         `json:",omitempty"` // OtherAddress
+	OtherPostalCode    Text         `json:",omitempty"` // OtherAddress
+	OtherCountry       Text         `json:",omitempty"` // OtherAddress
 	OtherPhone         Phone        `json:",omitempty"`
 	OwnerId            Id           `json:",omitempty"`
 	Phone              Phone        `json:",omitempty"`
