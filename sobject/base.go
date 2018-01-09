@@ -16,7 +16,7 @@ type Attr struct {
 	URL  string `json:"url"`
 }
 
-type Id string
+type ID string
 type Text string
 type Phone string
 type Date string     // yyyy-MM-dd
@@ -29,6 +29,8 @@ type Fax string
 type Picklist string
 type Number int64
 type AutoIncrement string
+type URL string
+type Decimal float64
 type Address string // Address Compound Fields
 type Location string // Geolocation Compound Field
 

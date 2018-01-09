@@ -10,12 +10,12 @@ type ContactSet struct {
 // Contact defines standard object "Contact".
 type Contact struct {
 	Attr               Attr         `json:"attributes,omitempty"`
-	Id                 Id           `json:",omitempty"`
-	AccountId          Id           `json:",omitempty"`
+	Id                 ID           `json:",omitempty"`
+	AccountId          ID           `json:",omitempty"`
 	AssistantName      Text         `json:",omitempty"`
 	AssistantPhone     Phone        `json:",omitempty"`
 	Birthdate          Date         `json:",omitempty"`
-	CreatedById        Id           `json:",omitempty"`
+	CreatedById        ID           `json:",omitempty"`
 	Department         Text         `json:",omitempty"`
 	Description        LongTextArea `json:",omitempty"`
 	DoNotCall          Checkbox     `json:",omitempty"`
@@ -27,7 +27,7 @@ type Contact struct {
 	Jigsaw             Text         `json:",omitempty"`
 	LastCURequestDate  DateTime     `json:",omitempty"`
 	LastCUUpdateDate   DateTime     `json:",omitempty"`
-	LastModifiedById   Id           `json:",omitempty"`
+	LastModifiedById   ID           `json:",omitempty"`
 	LeadSource         Picklist     `json:",omitempty"`
 	MailingAddress     Address      `json:",omitempty"`
 	MailingStreet      Text         `json:",omitempty"` // MailingAddress
@@ -46,8 +46,8 @@ type Contact struct {
 	OtherPostalCode    Text         `json:",omitempty"` // OtherAddress
 	OtherCountry       Text         `json:",omitempty"` // OtherAddress
 	OtherPhone         Phone        `json:",omitempty"`
-	OwnerId            Id           `json:",omitempty"`
+	OwnerId            ID           `json:",omitempty"`
 	Phone              Phone        `json:",omitempty"`
-	ReportsToId        Id           `json:",omitempty"`
+	ReportsToId        ID           `json:",omitempty"`
 	Title              Text         `json:",omitempty"`
 }
