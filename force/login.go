@@ -59,6 +59,11 @@ func (c *Client) Login(ctx context.Context, cred *Credential) error {
 		c.Logger.Printf("failed to execute the request: %v", err)
 		return err
 	}
+	defer func() {
+		if err := res.Body.Close(); err != nil {
+			c.Logger.Printf("failed to close body: %v", err)
+		}
+	}()
 
 	// Decode response
 	var session SessionID
